@@ -34,4 +34,27 @@
 #ifndef GTEST_INCLUDE_GTEST_INTERNAL_CUSTOM_GTEST_PORT_H_
 #define GTEST_INCLUDE_GTEST_INTERNAL_CUSTOM_GTEST_PORT_H_
 
+#ifdef arm
+
+// Disable all features that do not work out of the box with embedded targets
+
+#define GTEST_HAS_CLONE 0
+#define GTEST_HAS_EXCEPTIONS 0
+#define GTEST_HAS_POSIX_RE 0
+#define GTEST_HAS_PTHREAD 0
+#define GTEST_HAS_RTTI 0
+#define GTEST_HAS_STREAM_REDIRECTION 0
+#define GTEST_HAS_DEATH_TEST 0
+
+// The folowing function are used by gtest, but are not available on embedded targets
+// Having these dummy implementations is good enuogh for most cases
+
+extern "C" inline FILE* fdopen(int fd __attribute__((unused)), const char* mode __attribute__((unused))) { return NULL; }
+extern "C" inline char* getcwd(char *buf, size_t size __attribute__((unused))) { buf[0] = '.'; buf[1] = 0; return buf; }
+extern "C" inline char* strdup(const char *str) { return strcpy((char*)malloc(strlen(str)+1), str); }
+extern "C" inline int mkdir(const char *path __attribute__((unused)), mode_t mode __attribute__((unused))) { return -1; }
+extern "C" inline int fileno(FILE *stream __attribute__((unused))) { return -1; }
+
+#endif // arm 
+
 #endif  // GTEST_INCLUDE_GTEST_INTERNAL_CUSTOM_GTEST_PORT_H_
