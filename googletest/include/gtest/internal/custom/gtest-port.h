@@ -34,7 +34,7 @@
 #ifndef GTEST_INCLUDE_GTEST_INTERNAL_CUSTOM_GTEST_PORT_H_
 #define GTEST_INCLUDE_GTEST_INTERNAL_CUSTOM_GTEST_PORT_H_
 
-#ifdef arm
+#ifdef __arm__
 
 // Disable all features that do not work out of the box with embedded targets
 
@@ -55,6 +55,6 @@ extern "C" inline char* strdup(const char *str) { return strcpy((char*)malloc(st
 extern "C" inline int mkdir(const char *path __attribute__((unused)), mode_t mode __attribute__((unused))) { return -1; }
 extern "C" inline int fileno(FILE *stream __attribute__((unused))) { return -1; }
 
-#endif // arm 
+#endif // __arm__ 
 
 #endif  // GTEST_INCLUDE_GTEST_INTERNAL_CUSTOM_GTEST_PORT_H_

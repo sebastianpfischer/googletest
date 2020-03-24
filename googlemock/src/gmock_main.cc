@@ -49,7 +49,7 @@ void loop() { RUN_ALL_TESTS(); }
 
 #else
 
-#ifdef arm
+#ifdef __arm__
 #include <sys/stat.h>
 #include <fcntl.h>
 
@@ -67,7 +67,7 @@ GTEST_API_ int main(int argc, char** argv) {
 GTEST_API_ int _tmain(int argc, TCHAR** argv) {
 #else
 GTEST_API_ int main(int argc, char** argv) {
-#endif  // arm
+#endif  // __arm__
   std::cout << "Running main() from gmock_main.cc\n";
   // Since Google Mock depends on Google Test, InitGoogleMock() is
   // also responsible for initializing Google Test.  Therefore there's
